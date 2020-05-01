@@ -23,9 +23,20 @@ const storageService = {
     });
     localStorage.setItem("items", JSON.stringify(items));
   },
+  removeItem(itemId: number) {
+    const counters = this.getCounters().filter(
+      (counter) => counter.itemId != itemId
+    );
+    localStorage.setItem("counters", JSON.stringify(counters));
+    const items = this.getItems().filter((item) => item.id != itemId);
+    localStorage.setItem("items", JSON.stringify(items));
+  },
   // Counters.
   getCounters(): Counter[] {
     return JSON.parse(localStorage.getItem("counters") || "[]");
+  },
+  getItemCounters(itemId: number): Counter[] {
+    return this.getCounters().filter((c) => c.itemId == itemId);
   },
   getCounter(counterId: number): Counter | undefined {
     return this.getCounters().find((counter) => counter.id == counterId);

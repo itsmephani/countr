@@ -5,12 +5,10 @@ import {
   IonFabButton,
   IonIcon,
   IonTitle,
-  IonRow,
-  IonCol,
   IonHeader,
   IonToolbar,
   IonButtons,
-  IonBackButton,
+  IonButton,
 } from "@ionic/react";
 import React, { useState, useCallback } from "react";
 import { Counter } from "../types/counter";
@@ -76,14 +74,15 @@ export default (props: AddCounterProps) => {
         <IonHeader>
           <IonToolbar className="ion-text-center">
             <IonButtons slot="start">
-              <IonFab>
-                <IonFabButton size="small" color="transparent">
-                  <IonIcon icon={close} onClick={props.onClose} />
-                </IonFabButton>
-              </IonFab>
+              <IonButton onClick={props.onClose} fill="clear">
+                <IonIcon icon={close} />
+              </IonButton>
             </IonButtons>
-            <IonTitle color="primary">
-              &nbsp;&nbsp; Add {item.title} for {today}
+            <IonTitle>
+              <span style={{ color: "var(--ion-color-primary)" }}>
+                {item.title}
+              </span>{" "}
+              {today}
             </IonTitle>
           </IonToolbar>
         </IonHeader>

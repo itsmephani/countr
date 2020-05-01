@@ -45,11 +45,9 @@ const App: React.FC = () => (
         <IonTabBar slot="bottom">
           <IonTabButton tab="list" href="/list">
             <IonIcon icon={listOutline} />
-            <IonLabel>Items</IonLabel>
           </IonTabButton>
           <IonTabButton tab="stats" href="/stats">
-            <IonIcon icon={statsChart} />
-            <IonLabel>Stats</IonLabel>
+            <IonIcon icon={statsChart} color="tertiary" />
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

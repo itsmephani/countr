@@ -21,13 +21,21 @@ const dateService = {
       .toString()
       .padStart(2, "0")}${date.getFullYear()}`;
   },
-  getDateFromNumber(i: string) {
+  getDateFromString(i: string) {
     const date = this.getTodayDate();
     date.setMonth(+`${i[0]}${i[1]}`);
     date.setDate(+`${i[2]}${i[3]}`);
     date.setFullYear(+`${i[4]}${i[5]}${i[6]}${i[7]}`);
 
     return date;
+  },
+  getReadableDateFromString(i: string) {
+    const date = this.getTodayDate();
+    date.setMonth(+`${i[0]}${i[1]}`);
+    date.setDate(+`${i[2]}${i[3]}`);
+    date.setFullYear(+`${i[4]}${i[5]}${i[6]}${i[7]}`);
+
+    return this.getReadableDateFormatted(date);
   },
 };
 

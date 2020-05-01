@@ -5,11 +5,8 @@ import {
   IonButton,
   IonTitle,
   IonContent,
-  IonRow,
   IonToolbar,
   IonButtons,
-  IonFab,
-  IonFabButton,
   IonIcon,
   IonHeader,
 } from "@ionic/react";
@@ -18,6 +15,7 @@ import { Item } from "../types/item";
 import storageService from "../services/storage.service";
 import dateService from "../services/date.service";
 import { close } from "ionicons/icons";
+import KeyCode from "../constants/KeyCode";
 
 export type AddItemProps = {
   showModal: boolean;
@@ -49,11 +47,9 @@ export default (props: AddItemProps) => {
         <IonHeader>
           <IonToolbar className="ion-text-center">
             <IonButtons slot="start">
-              <IonFab>
-                <IonFabButton size="small" color="transparent">
-                  <IonIcon icon={close} onClick={props.onClose} />
-                </IonFabButton>
-              </IonFab>
+              <IonButton onClick={props.onClose} fill="clear">
+                <IonIcon icon={close} />
+              </IonButton>
             </IonButtons>
             <IonTitle color="primary">Add Item</IonTitle>
           </IonToolbar>
@@ -63,6 +59,11 @@ export default (props: AddItemProps) => {
             <IonInput
               value={item.title}
               placeholder="Enter item"
+              onKeyDown={(e) => {
+                if (e.keyCode == KeyCode.ENTER || e.which == KeyCode.ENTER) {
+                  addItem();
+                }
+              }}
               onIonChange={(e) => setItem({ ...item, title: e.detail.value! })}
             ></IonInput>
           </IonItem>
