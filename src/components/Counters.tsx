@@ -37,7 +37,6 @@ export default (props: CountersProps) => {
       storageService.getItemCounters(props.item.id),
       props.dates
     ) as Counter[];
-    console.log(data);
     setCounters(data);
   };
   const reduceCount = (counter: Counter) => {
@@ -56,7 +55,7 @@ export default (props: CountersProps) => {
   }, []);
 
   return (
-    <IonModal isOpen={props.showModal}>
+    <IonModal onDidDismiss={props.onClose} isOpen={props.showModal}>
       <IonHeader>
         <IonToolbar color="tertiary">
           <IonButtons slot="start">

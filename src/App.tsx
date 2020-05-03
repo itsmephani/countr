@@ -10,7 +10,12 @@ import {
   IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { listOutline, statsChart } from "ionicons/icons";
+import {
+  listOutline,
+  statsChart,
+  statsChartOutline,
+  list,
+} from "ionicons/icons";
 import Tab1 from "./pages/Tab1";
 import Tab2 from "./pages/Tab2";
 
@@ -38,16 +43,20 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/list" component={Tab1} exact={true} />
+          <Route path="/items" component={Tab1} exact={true} />
           <Route path="/stats" component={Tab2} exact={true} />
-          <Route path="/" render={() => <Redirect to="/list" />} exact={true} />
+          <Route
+            path="/"
+            render={() => <Redirect to="/items" />}
+            exact={true}
+          />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="list" href="/list">
-            <IonIcon icon={listOutline} />
+          <IonTabButton tab="items" href="/items">
+            <IonIcon icon={list} />
           </IonTabButton>
           <IonTabButton tab="stats" href="/stats">
-            <IonIcon icon={statsChart} color="tertiary" />
+            <IonIcon icon={statsChart} />
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

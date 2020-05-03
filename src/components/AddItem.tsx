@@ -42,7 +42,12 @@ export default (props: AddItemProps) => {
   }, [item]);
 
   return (
-    <IonModal animated={true} swipeToClose={true} isOpen={props.showModal}>
+    <IonModal
+      onDidDismiss={props.onClose}
+      animated={true}
+      swipeToClose={true}
+      isOpen={props.showModal}
+    >
       <IonContent>
         <IonHeader>
           <IonToolbar className="ion-text-center">
