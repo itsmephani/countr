@@ -20,7 +20,7 @@ import storageService from "../services/storage.service";
 import { Item } from "../types/item";
 import dateService from "../services/date.service";
 import { Counter } from "../types/counter";
-import { close, removeOutline } from "ionicons/icons";
+import { close, removeOutline, addOutline } from "ionicons/icons";
 import dateFilterService, { DateFilters } from "../services/dateFilter.service";
 
 export type CountersProps = {
@@ -39,15 +39,29 @@ export default (props: CountersProps) => {
     ) as Counter[];
     setCounters(data);
   };
+
+  const updateItemAndCounter = (counterItem: Item, counter: Counter) => {
+    storageService.updateCounter(counter);
+    storageService.updateItemCount(counterItem.id, counterItem.count);
+    getItemsFiltered();
+  };
+
   const reduceCount = (counter: Counter) => {
     const counterItem = storageService.getItem(counter.itemId);
     if (!counterItem || counter.count < 0) return;
 
     counter.count = counter.count == 0 ? 0 : counter.count - 1;
-    storageService.updateCounter(counter);
     counterItem.count = counterItem.count == 0 ? 0 : counterItem.count - 1;
-    storageService.updateItemCount(counterItem.id, counterItem.count);
-    getItemsFiltered();
+    updateItemAndCounter(counterItem, counter);
+  };
+
+  const addCount = (counter: Counter) => {
+    const counterItem = storageService.getItem(counter.itemId);
+    if (!counterItem || counter.count < 0) return;
+
+    counter.count = counter.count + 1;
+    counterItem.count = counterItem.count + 1;
+    updateItemAndCounter(counterItem, counter);
   };
 
   useEffect(() => {
@@ -82,6 +96,12 @@ export default (props: CountersProps) => {
                   onClick={() => reduceCount(counter)}
                 >
                   <IonIcon icon={removeOutline}></IonIcon>
+                </IonItemOption>
+                <IonItemOption
+                  color="tertiary"
+                  onClick={() => addCount(counter)}
+                >
+                  <IonIcon icon={addOutline}></IonIcon>
                 </IonItemOption>
               </IonItemOptions>
             </IonItemSliding>

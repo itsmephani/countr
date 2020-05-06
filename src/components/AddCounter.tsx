@@ -64,7 +64,7 @@ export default (props: AddCounterProps) => {
       counterToAdd.itemId = item.id;
       storageService.addCounter(counterToAdd);
     }
-    storageService.updateItemCount(item.id, counterToAdd.count);
+    storageService.updateItemCount(item.id, item.count + 1);
     props.counterAdded(counterToAdd);
   }, [counter]);
 
